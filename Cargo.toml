@@ -7,3 +7,10 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+gdnative = "0.5.0"
+
+
+[lib]
+# Since GDNative can only use C-compatible dynamic libraries, the crate type
+#  has to be set accordingly
+crate-type = ["cdylib"]
