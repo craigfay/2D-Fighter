@@ -1,6 +1,7 @@
 # Commands
 * Create symlink for Godot Binary (MacOS): `ln -s /Applications/Godot.app/Contents/MacOS/Godot /usr/local/bin/godot`
 * Open Godot Editor: `godot -e`
+* Prepare Git Submodules: `git submodule init && git submodule update`
 
 # Resources
 * [Godot Command Line Tutorial](https://docs.godotengine.org/en/3.1/getting_started/editor/command_line_tutorial.html)
