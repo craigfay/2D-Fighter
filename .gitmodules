@@ -1,0 +1,3 @@
+[submodule "gdnative_clone"]
+	path = gdnative_clone
+	url = https://github.com/GodotNativeTools/godot-rust.git
