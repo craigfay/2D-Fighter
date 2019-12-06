@@ -1,3 +1,6 @@
+# About
+* The `*.gdnlib` file tells Godot where to find compiled Rust output.
+
 # Commands
 * Create symlink for Godot Binary (MacOS): `ln -s /Applications/Godot.app/Contents/MacOS/Godot /usr/local/bin/godot`
 * Open Godot Editor: `godot -e`
