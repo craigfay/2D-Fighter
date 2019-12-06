@@ -11,3 +11,4 @@
 * [Gorgeous Godot Games in Rust](https://medium.com/@recallsingularity/gorgeous-godot-games-in-rust-1867c56045e6)
 * [Using the GDNative Module](https://docs.godotengine.org/en/latest/tutorials/plugins/gdnative/gdnative-cpp-example.html?highlight=owner#using-the-gdnative-module)
 * [Rendering a 2D game in 3D](https://medium.com/@recallsingularity/rendering-a-2d-game-in-3d-bd24ddbee6eb)
+* [Rust Game Server](https://medium.com/@buterajay/game-server-in-150-lines-of-rust-ce1782199907?source=post_recirc---------2------------------)
