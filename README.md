@@ -6,3 +6,4 @@
 # Resources
 * [Godot Command Line Tutorial](https://docs.godotengine.org/en/3.1/getting_started/editor/command_line_tutorial.html)
 * [Gorgeous Godot Games in Rust](https://medium.com/@recallsingularity/gorgeous-godot-games-in-rust-1867c56045e6)
+* [Using the GDNative Module](https://docs.godotengine.org/en/latest/tutorials/plugins/gdnative/gdnative-cpp-example.html?highlight=owner#using-the-gdnative-module)
