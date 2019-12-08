@@ -28,7 +28,10 @@ shape = SubResource( 1 )
 position = Vector2( 8.97827, 0 )
 texture = ExtResource( 2 )
 
-[node name="Ground" type="StaticBody2D" parent="."]
+[node name="Ground" type="Node" parent="."]
+
+[node name="Ground1" type="StaticBody2D" parent="Ground"]
+editor/display_folded = true
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 400, 176 )
 scale = Vector2( 0.1, 0.1 )
@@ -36,8 +39,68 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="Ground"]
+[node name="Sprite" type="Sprite" parent="Ground/Ground1"]
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/Ground1"]
+shape = SubResource( 2 )
+
+[node name="Ground2" type="StaticBody2D" parent="Ground"]
+editor/display_folded = true
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 432, 176 )
+scale = Vector2( 0.1, 0.1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Ground/Ground2"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/Ground2"]
+shape = SubResource( 2 )
+
+[node name="Ground3" type="StaticBody2D" parent="Ground"]
+editor/display_folded = true
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 496, 176 )
+scale = Vector2( 0.1, 0.1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Ground/Ground3"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/Ground3"]
+shape = SubResource( 2 )
+
+[node name="Ground4" type="StaticBody2D" parent="Ground"]
+editor/display_folded = true
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 464, 176 )
+scale = Vector2( 0.1, 0.1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Ground/Ground4"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/Ground4"]
+shape = SubResource( 2 )
+
+[node name="Ground5" type="StaticBody2D" parent="Ground"]
+editor/display_folded = true
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 496, 144 )
+scale = Vector2( 0.1, 0.1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Ground/Ground5"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/Ground5"]
 shape = SubResource( 2 )
