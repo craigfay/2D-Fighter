@@ -28,6 +28,9 @@ shape = SubResource( 1 )
 position = Vector2( 8.97827, 0 )
 texture = ExtResource( 2 )
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+
 [node name="Ground" type="Node" parent="."]
 
 [node name="Ground1" type="StaticBody2D" parent="Ground"]
