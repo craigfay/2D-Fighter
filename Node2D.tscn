@@ -1,88 +1,137 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 240, 320 )
-
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 130 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 31, 24 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 310, 200 )
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 240, 120 )
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 310, 89.9995 )
 
-[sub_resource type="Animation" id=9]
-resource_name = "Idle"
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 310, 320 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 240, 320 )
+
+[sub_resource type="Animation" id=10]
+resource_name = "CROUCH"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("States/CROUCH_0/HURTBOX:collision_layer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "IDLE"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("States/IDLE_0/HURTBOX:collision_layer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 0 ]
+}
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 377, 10 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 26, 33 )
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="KinematicBody2D" parent="."]
-editor/display_folded = true
 light_mask = 4097
 position = Vector2( 334, 196 )
 scale = Vector2( 0.1, 0.1 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="PhysicsCollider" type="CollisionShape2D" parent="Player"]
-position = Vector2( -10, -90.0001 )
-scale = Vector2( 1, 1 )
-shape = SubResource( 3 )
+[node name="States" type="Node2D" parent="Player"]
 
-[node name="HurtBox" type="Area2D" parent="Player"]
+[node name="IDLE_0" type="Node2D" parent="Player/States"]
 editor/display_folded = true
-scale = Vector2( 1, 1 )
-monitorable = false
+visible = false
+position = Vector2( -3340, -1960 )
+scale = Vector2( 10, 10 )
 
-[node name="Head" type="CollisionShape2D" parent="Player/HurtBox"]
+[node name="HURTBOX" type="Area2D" parent="Player/States/IDLE_0"]
+editor/display_folded = true
+position = Vector2( 334, 196 )
+scale = Vector2( 0.1, 0.1 )
+monitorable = false
+collision_layer = 2
+
+[node name="HEAD" type="CollisionShape2D" parent="Player/States/IDLE_0/HURTBOX"]
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 10, -610 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
-[node name="Body" type="CollisionShape2D" parent="Player/HurtBox"]
+[node name="BODY" type="CollisionShape2D" parent="Player/States/IDLE_0/HURTBOX"]
 modulate = Color( 1, 1, 0.0509804, 1 )
 position = Vector2( -40, -370 )
 scale = Vector2( 10, 10 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 
-[node name="Legs" type="CollisionShape2D" parent="Player/HurtBox"]
+[node name="LEGS" type="CollisionShape2D" parent="Player/States/IDLE_0/HURTBOX"]
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( -40, 29.9999 )
-shape = SubResource( 7 )
+shape = SubResource( 3 )
+
+[node name="CROUCH_0" type="Node2D" parent="Player/States"]
+position = Vector2( -3340, -1960 )
+scale = Vector2( 10, 10 )
+
+[node name="HURTBOX" type="Area2D" parent="Player/States/CROUCH_0"]
+editor/display_folded = true
+position = Vector2( 334, 196 )
+scale = Vector2( 0.1, 0.1 )
+monitorable = false
+collision_layer = 2
+collision_mask = 0
+
+[node name="HEAD" type="CollisionShape2D" parent="Player/States/CROUCH_0/HURTBOX"]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( -40.0002, -500 )
+shape = SubResource( 4 )
+
+[node name="LEGS" type="CollisionShape2D" parent="Player/States/CROUCH_0/HURTBOX"]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( -40, -90.0001 )
+shape = SubResource( 5 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( -10, -0.00012207 )
+position = Vector2( -10, -0.000244141 )
 current = true
 zoom = Vector2( 0.75, 0.75 )
 
-[node name="HitboxArea" type="Area2D" parent="Player"]
-editor/display_folded = true
-visible = false
-modulate = Color( 1, 0, 0, 1 )
-position = Vector2( -90, -80.0001 )
-
-[node name="HitboxCollision" type="CollisionShape2D" parent="Player/HitboxArea"]
-position = Vector2( 498.193, -360 )
-scale = Vector2( 1, 1 )
+[node name="PhysicsCollider" type="CollisionShape2D" parent="Player"]
+position = Vector2( -10, -90.0001 )
 shape = SubResource( 6 )
-disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
-anims/Idle = SubResource( 9 )
+anims/CROUCH = SubResource( 10 )
+anims/IDLE = SubResource( 7 )
 
 [node name="Ground" type="StaticBody2D" parent="."]
 editor/display_folded = true
@@ -96,4 +145,4 @@ shape = SubResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barrel"]
 position = Vector2( 502, 186 )
-shape = SubResource( 10 )
+shape = SubResource( 9 )

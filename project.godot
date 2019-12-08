@@ -16,3 +16,10 @@ _global_script_class_icons={
 [application]
 
 run/main_scene="res://Node2D.tscn"
+
+[layer_names]
+
+2d_physics/layer_1="p1_inactive_colliders"
+2d_render/layer_2="p1_hitbox"
+2d_physics/layer_2="p1_active_hurtboxes"
+2d_physics/layer_3="p1_active_hitboxes"
