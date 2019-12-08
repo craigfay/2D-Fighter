@@ -1,10 +1,49 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://red.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 160, 160 )
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 80, 240 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 80, 80 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 16, 24 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 120, 80 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "light_punch"
+length = 0.7
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("HitboxArea/HitboxCollision:disabled")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxArea:visible")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 160, 160 )
@@ -13,30 +52,54 @@ extents = Vector2( 160, 160 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
 light_mask = 4097
-position = Vector2( 432, 144 )
+position = Vector2( 433, 136 )
 scale = Vector2( 0.1, 0.1 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2( 8.97827, 0 )
-shape = SubResource( 1 )
+[node name="PhysicsCollider" type="CollisionShape2D" parent="Player"]
+position = Vector2( -10, -0.00012207 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="Player"]
-position = Vector2( 8.97827, 0 )
-texture = ExtResource( 2 )
+[node name="HurtBox" type="Area2D" parent="Player"]
+scale = Vector2( 1, 1 )
+monitorable = false
+
+[node name="Head" type="CollisionShape2D" parent="Player/HurtBox"]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( 70, -240 )
+shape = SubResource( 4 )
+
+[node name="Body" type="CollisionShape2D" parent="Player/HurtBox"]
+modulate = Color( 1, 1, 0.0509804, 1 )
+position = Vector2( -10.0002, -0.00012207 )
+scale = Vector2( 10, 10 )
+shape = SubResource( 5 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2( -10, -0.00012207 )
 current = true
 zoom = Vector2( 0.75, 0.75 )
+
+[node name="HitboxArea" type="Area2D" parent="Player"]
+editor/display_folded = true
+visible = false
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( -90, -80.0001 )
+
+[node name="HitboxCollision" type="CollisionShape2D" parent="Player/HitboxArea"]
+position = Vector2( 280, -80 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 6 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+anims/light_punch = SubResource( 7 )
 
 [node name="Ground" type="Node" parent="."]
 editor/display_folded = true
 
 [node name="Ground1" type="StaticBody2D" parent="Ground"]
-editor/display_folded = true
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 400, 176 )
 scale = Vector2( 0.1, 0.1 )
