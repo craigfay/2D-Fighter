@@ -4,16 +4,16 @@
 [ext_resource path="res://red.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 80, 240 )
+extents = Vector2( 160, 400 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 80, 80 )
+extents = Vector2( 160, 160 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 16, 24 )
+extents = Vector2( 28, 40 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 120, 80 )
+extents = Vector2( 240, 120 )
 
 [sub_resource type="Animation" id=7]
 resource_name = "light_punch"
@@ -52,12 +52,15 @@ extents = Vector2( 160, 160 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
 light_mask = 4097
-position = Vector2( 433, 136 )
+position = Vector2( 438, 137 )
 scale = Vector2( 0.1, 0.1 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="PhysicsCollider" type="CollisionShape2D" parent="Player"]
-position = Vector2( -10, -0.00012207 )
+position = Vector2( -10, -160 )
 scale = Vector2( 1, 1 )
 shape = SubResource( 3 )
 
@@ -67,12 +70,12 @@ monitorable = false
 
 [node name="Head" type="CollisionShape2D" parent="Player/HurtBox"]
 modulate = Color( 1, 1, 0, 1 )
-position = Vector2( 70, -240 )
+position = Vector2( 70, -560 )
 shape = SubResource( 4 )
 
 [node name="Body" type="CollisionShape2D" parent="Player/HurtBox"]
 modulate = Color( 1, 1, 0.0509804, 1 )
-position = Vector2( -10.0002, -0.00012207 )
+position = Vector2( -10.0002, -160 )
 scale = Vector2( 10, 10 )
 shape = SubResource( 5 )
 
@@ -82,16 +85,14 @@ current = true
 zoom = Vector2( 0.75, 0.75 )
 
 [node name="HitboxArea" type="Area2D" parent="Player"]
-editor/display_folded = true
 visible = false
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( -90, -80.0001 )
 
 [node name="HitboxCollision" type="CollisionShape2D" parent="Player/HitboxArea"]
-position = Vector2( 280, -80 )
+position = Vector2( 480, -360 )
 scale = Vector2( 1, 1 )
 shape = SubResource( 6 )
-disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 anims/light_punch = SubResource( 7 )
