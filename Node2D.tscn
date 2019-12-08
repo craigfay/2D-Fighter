@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://red.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 160, 400 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 160, 79.9996 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 160, 160 )
@@ -27,7 +30,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5 ),
+"times": PoolRealArray( 0, 0.25, 0.35 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, true, false ]
@@ -39,6 +42,18 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HurtBox/RightArm:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0, 0.25, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
@@ -52,12 +67,9 @@ extents = Vector2( 160, 160 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
 light_mask = 4097
-position = Vector2( 438, 137 )
+position = Vector2( 439, 137 )
 scale = Vector2( 0.1, 0.1 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="PhysicsCollider" type="CollisionShape2D" parent="Player"]
 position = Vector2( -10, -160 )
@@ -67,6 +79,11 @@ shape = SubResource( 3 )
 [node name="HurtBox" type="Area2D" parent="Player"]
 scale = Vector2( 1, 1 )
 monitorable = false
+
+[node name="RightArm" type="CollisionShape2D" parent="Player/HurtBox"]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( 430, -480 )
+shape = SubResource( 8 )
 
 [node name="Head" type="CollisionShape2D" parent="Player/HurtBox"]
 modulate = Color( 1, 1, 0, 1 )
