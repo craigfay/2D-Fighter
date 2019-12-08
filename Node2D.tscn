@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 
@@ -23,9 +23,13 @@ resource_name = "Idle"
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 377, 10 )
 
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 26, 33 )
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="KinematicBody2D" parent="."]
+editor/display_folded = true
 light_mask = 4097
 position = Vector2( 334, 196 )
 scale = Vector2( 0.1, 0.1 )
@@ -40,6 +44,7 @@ scale = Vector2( 1, 1 )
 shape = SubResource( 3 )
 
 [node name="HurtBox" type="Area2D" parent="Player"]
+editor/display_folded = true
 scale = Vector2( 1, 1 )
 monitorable = false
 
@@ -65,6 +70,7 @@ current = true
 zoom = Vector2( 0.75, 0.75 )
 
 [node name="HitboxArea" type="Area2D" parent="Player"]
+editor/display_folded = true
 visible = false
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( -90, -80.0001 )
@@ -79,8 +85,15 @@ disabled = true
 anims/Idle = SubResource( 9 )
 
 [node name="Ground" type="StaticBody2D" parent="."]
+editor/display_folded = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+[node name="FloorCollider" type="CollisionShape2D" parent="Ground"]
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 423, 229 )
 shape = SubResource( 8 )
+
+[node name="Barrel" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrel"]
+position = Vector2( 502, 186 )
+shape = SubResource( 10 )

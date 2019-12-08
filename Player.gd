@@ -4,8 +4,8 @@ const UP = Vector2(0, -1)
 var motion = Vector2()
 
 export var walk_speed = 96
-export var gravity_force = 16
-export var jump_force = 320
+export var gravity_force = 32
+export var jump_force = 640
 
 func _physics_process(delta):
     # Gravity
