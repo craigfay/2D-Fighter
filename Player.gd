@@ -24,3 +24,10 @@ func _physics_process(delta):
     if is_on_floor():
         if Input.is_action_just_pressed("ui_up"):
             motion.y = -jump_force
+
+func _ready():
+	var jump_animation = Animation.new()
+	jump_animation.add_track(0)
+	jump_animation.length = .8
+	var path = String(self.get_path()) + ":frame"
+	jump_animation.track_set_path(0, path)
