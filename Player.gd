@@ -3,11 +3,20 @@ extends KinematicBody2D
 const UP = Vector2(0, -1)
 var motion = Vector2()
 
+var state_machine
+var is_actionable = true
+
 export var walk_speed = 96
 export var gravity_force = 32
 export var jump_force = 640
 
+
 func _physics_process(delta):
+
+    for child in $States.get_children():
+        child.visible = false
+
+
     # Gravity
     motion.y += gravity_force
     motion = move_and_slide(motion, UP)
@@ -25,9 +34,13 @@ func _physics_process(delta):
         if Input.is_action_just_pressed("ui_up"):
             motion.y = -jump_force
 
-func _ready():
-	var jump_animation = Animation.new()
-	jump_animation.add_track(0)
-	jump_animation.length = .8
-	var path = String(self.get_path()) + ":frame"
-	jump_animation.track_set_path(0, path)
+    # Crouch
+    if Input.is_action_pressed("ui_down"):
+        if is_actionable:
+            if is_on_floor():
+                $States.get_node("CROUCH_0").visible = true
+                return
+
+    if is_actionable:
+        $States.get_node("IDLE_0").visible = true
+        return
