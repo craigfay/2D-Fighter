@@ -18,7 +18,7 @@ extents = Vector2( 310, 200 )
 extents = Vector2( 310, 89.9995 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 310, 320 )
+extents = Vector2( 310, 240 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 377, 10 )
@@ -70,13 +70,10 @@ position = Vector2( -40, 29.9999 )
 shape = SubResource( 4 )
 
 [node name="CROUCH_0" type="Node2D" parent="Player/States"]
-editor/display_folded = true
-visible = false
 position = Vector2( -3340, -1960 )
 scale = Vector2( 10, 10 )
 
 [node name="HURTBOX" type="Area2D" parent="Player/States/CROUCH_0"]
-editor/display_folded = true
 position = Vector2( 334, 196 )
 scale = Vector2( 0.1, 0.1 )
 monitorable = false
@@ -85,12 +82,12 @@ collision_mask = 0
 
 [node name="HEAD" type="CollisionShape2D" parent="Player/States/CROUCH_0/HURTBOX"]
 modulate = Color( 1, 1, 0, 1 )
-position = Vector2( -40.0002, -500 )
+position = Vector2( -39.9997, -340 )
 shape = SubResource( 5 )
 
 [node name="LEGS" type="CollisionShape2D" parent="Player/States/CROUCH_0/HURTBOX"]
 modulate = Color( 1, 1, 0, 1 )
-position = Vector2( -40, -90.0001 )
+position = Vector2( -40, -9.99988 )
 shape = SubResource( 6 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
