@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 
@@ -9,13 +9,16 @@ extents = Vector2( 240, 320 )
 extents = Vector2( 160, 130 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 31, 24 )
+extents = Vector2( 35, 24 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 310, 200 )
+extents = Vector2( 310, 290 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 160, 130 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 310, 89.9995 )
+extents = Vector2( 290, 110 )
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 310, 240 )
@@ -41,13 +44,11 @@ shape = SubResource( 1 )
 [node name="States" type="Node2D" parent="Player"]
 
 [node name="IDLE_0" type="Node2D" parent="Player/States"]
-editor/display_folded = true
 visible = false
 position = Vector2( -3340, -1960 )
 scale = Vector2( 10, 10 )
 
 [node name="HURTBOX" type="Area2D" parent="Player/States/IDLE_0"]
-editor/display_folded = true
 position = Vector2( 334, 196 )
 scale = Vector2( 0.1, 0.1 )
 monitorable = false
@@ -55,18 +56,18 @@ collision_layer = 2
 
 [node name="HEAD" type="CollisionShape2D" parent="Player/States/IDLE_0/HURTBOX"]
 modulate = Color( 1, 1, 0, 1 )
-position = Vector2( 10, -610 )
+position = Vector2( 30, -800 )
 shape = SubResource( 2 )
 
 [node name="BODY" type="CollisionShape2D" parent="Player/States/IDLE_0/HURTBOX"]
 modulate = Color( 1, 1, 0.0509804, 1 )
-position = Vector2( -40, -370 )
+position = Vector2( -30, -510 )
 scale = Vector2( 10, 10 )
 shape = SubResource( 3 )
 
 [node name="LEGS" type="CollisionShape2D" parent="Player/States/IDLE_0/HURTBOX"]
 modulate = Color( 1, 1, 0, 1 )
-position = Vector2( -40, 29.9999 )
+position = Vector2( -40, -60.0001 )
 shape = SubResource( 4 )
 
 [node name="CROUCH_0" type="Node2D" parent="Player/States"]
@@ -82,7 +83,13 @@ collision_mask = 0
 
 [node name="HEAD" type="CollisionShape2D" parent="Player/States/CROUCH_0/HURTBOX"]
 modulate = Color( 1, 1, 0, 1 )
-position = Vector2( -39.9997, -340 )
+position = Vector2( 50, -410 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 11 )
+
+[node name="BODY" type="CollisionShape2D" parent="Player/States/CROUCH_0/HURTBOX"]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( -19.9997, -300 )
 shape = SubResource( 5 )
 
 [node name="LEGS" type="CollisionShape2D" parent="Player/States/CROUCH_0/HURTBOX"]
