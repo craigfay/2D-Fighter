@@ -3,50 +3,43 @@ extends KinematicBody2D
 const UP = Vector2(0, -1)
 var motion = Vector2()
 
-# TODO Add state queue
-var is_actionable = true
-
 export var walk_speed = 240
 export var gravity_force = 32
 export var jump_force = 640
 
 # Animations
-var current_animation = {
-    "frames": IDLE_ANIMATION,
-    "repeats": true,
-    "index": 0
-}
+var current_animation = IDLE_ANIMATION
+var current_animation_frame = 0
 
 func _process(delta):
+    
+    var accepting_input = true
 
     # Run 
-    if is_actionable:
+    if accepting_input && can_do('RUN_ANIMATION'):
         if Input.is_action_pressed("ui_right"):
-            if is_on_floor():
-                current_animation.frames = RUN_ANIMATION
-                current_animation.repeats = false
-                is_actionable = false
+            current_animation = RUN_ANIMATION
+            current_animation_frame = 0
+            accepting_input = false
 
-    # Idle
-    if is_actionable:
-        current_animation.frames = IDLE_ANIMATION
-        current_animation.index = 0
-        current_animation.repeats = true
+    # Jump
+    if accepting_input && can_do('JUMP_ANIMATION'):
+        if Input.is_action_just_pressed("ui_up"):
+            current_animation = JUMP_ANIMATION
+            current_animation_frame = 0
+            accepting_input = false
 
     # Advance animation frame
-    $Sprite.set('frame', current_animation.frames[current_animation.index])
-    # If the animation is finished
-    if current_animation.index == (current_animation.frames.size() - 1):
-        current_animation.index = 0
-
-        if not current_animation.repeats:
-            # Idle
-            current_animation.frames = IDLE_ANIMATION
-            current_animation.repeats = true
-            is_actionable = true
-
+    $Sprite.set('frame', current_animation.frames[current_animation_frame])
+    if current_animation_frame == (current_animation.frames.size() - 1):
+        current_animation = IDLE_ANIMATION
+        current_animation_frame = 0
     else:
-        current_animation.index += 1
+        current_animation_frame += 1
+
+
+func can_do(animation):
+    return current_animation.cancels_into.has(animation)
 
 
 func _physics_process(delta):
@@ -69,28 +62,59 @@ func _physics_process(delta):
         if Input.is_action_just_pressed("ui_up"):
             motion.y = -jump_force
 
-const IDLE_ANIMATION = [
-    10,10,10,10,
-    11,11,11,11,
-    12,12,12,12,
-    13,13,13,13,
-    14,14,14,14,
-    15,15,15,15,
-    16,16,16,16,
-    17,17,17,17,
-    18,18,18,18,
-    19,19,19,19,
-]
 
-const RUN_ANIMATION = [
-    0,0,0,0,
-    1,1,1,1,
-    2,2,2,2,
-    3,3,3,3,
-    4,4,4,4,
-    5,5,5,5,
-    6,6,6,6,
-    7,7,7,7,
-    8,8,8,8,
-    9,9,9,9,
-]
+const IDLE_ANIMATION = {
+    "infinite": true,
+    "cancels_into": [
+        "RUN_ANIMATION",
+        "JUMP_ANIMATION",
+    ],
+    "frames": [
+        10,10,10,10,
+        11,11,11,11,
+        12,12,12,12,
+        13,13,13,13,
+        14,14,14,14,
+        15,15,15,15,
+        16,16,16,16,
+        17,17,17,17,
+        18,18,18,18,
+        19,19,19,19,
+    ]
+}
+
+const RUN_ANIMATION = {
+    "infinite": false,
+    "cancels_into": [
+        "JUMP_ANIMATION",
+    ],
+    "frames": [
+        0,0,0,0,
+        1,1,1,1,
+        2,2,2,2,
+        3,3,3,3,
+        4,4,4,4,
+        5,5,5,5,
+        6,6,6,6,
+        7,7,7,7,
+        8,8,8,8,
+        9,9,9,9,
+    ]
+}
+
+const JUMP_ANIMATION = {
+    "infinite": false,
+    "cancels_into": [],
+    "frames": [
+        20,20,20,20,
+        21,21,21,21,
+        22,22,22,22,
+        23,23,23,23,
+        24,24,24,24,
+        25,25,25,25,
+        26,26,26,26,
+        27,27,27,27,
+        28,28,28,28,
+        29,29,29,29,
+    ]
+}
