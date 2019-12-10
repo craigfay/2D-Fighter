@@ -6,7 +6,7 @@ var motion = Vector2()
 # TODO Add state queue
 var is_actionable = true
 
-export var walk_speed = 96
+export var walk_speed = 240
 export var gravity_force = 32
 export var jump_force = 640
 
@@ -29,27 +29,39 @@ func _process(delta):
                 $States.get_node("CROUCH_0").visible = true
 
     # Run 
-    if Input.is_action_pressed("ui_right"):
-        if is_actionable:
+    if is_actionable:
+        if Input.is_action_pressed("ui_right"):
             if is_on_floor():
                 $States.get_node("CROUCH_0").visible = true
                 current_animation.frames = RUN_ANIMATION
+                current_animation.repeats = false
                 is_actionable = false
 
     # Crouch
-    if Input.is_action_pressed("ui_down"):
-        if is_actionable:
+    if is_actionable:
+        if Input.is_action_pressed("ui_down"):
             if is_on_floor():
                 $States.get_node("CROUCH_0").visible = true
 
     # Idle
     if is_actionable:
-        $States.get_node("IDLE_0").visible = true
+        current_animation.frames = IDLE_ANIMATION
+        current_animation.index = 0
+        current_animation.repeats = true
+        # $States.get_node("IDLE_0").visible = true
 
     # Advance animation frame
     $Sprite.set('frame', current_animation.frames[current_animation.index])
+    # If the animation is finished
     if current_animation.index == (current_animation.frames.size() - 1):
         current_animation.index = 0
+
+        if not current_animation.repeats:
+            # Idle
+            current_animation.frames = IDLE_ANIMATION
+            current_animation.repeats = true
+            is_actionable = true
+
     else:
         current_animation.index += 1
 
