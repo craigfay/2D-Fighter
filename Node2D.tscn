@@ -1,45 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://ProtoAnims.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 240, 320 )
-
-[sub_resource type="Animation" id=2]
-resource_name = "IDLE"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 10, 11, 12, 13, 14, 15, 16, 17, 18 ]
-}
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 160, 130 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 35, 24 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 310, 290 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 160, 130 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 290, 110 )
-
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 310, 240 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 377, 10 )
@@ -67,64 +32,6 @@ frame = 10
 [node name="PhysicsCollider" type="CollisionShape2D" parent="Player"]
 position = Vector2( -10, -90.0001 )
 shape = SubResource( 1 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
-anims/IDLE = SubResource( 2 )
-
-[node name="States" type="Node2D" parent="Player"]
-
-[node name="IDLE_0" type="Node2D" parent="Player/States"]
-visible = false
-position = Vector2( -3340, -1960 )
-scale = Vector2( 10, 10 )
-
-[node name="HURTBOX" type="Area2D" parent="Player/States/IDLE_0"]
-position = Vector2( 334, 196 )
-scale = Vector2( 0.1, 0.1 )
-monitorable = false
-collision_layer = 2
-
-[node name="HEAD" type="CollisionShape2D" parent="Player/States/IDLE_0/HURTBOX"]
-modulate = Color( 1, 1, 0, 1 )
-position = Vector2( 30, -800 )
-shape = SubResource( 3 )
-
-[node name="BODY" type="CollisionShape2D" parent="Player/States/IDLE_0/HURTBOX"]
-modulate = Color( 1, 1, 0.0509804, 1 )
-position = Vector2( -30, -510 )
-scale = Vector2( 10, 10 )
-shape = SubResource( 4 )
-
-[node name="LEGS" type="CollisionShape2D" parent="Player/States/IDLE_0/HURTBOX"]
-modulate = Color( 1, 1, 0, 1 )
-position = Vector2( -40, -60.0001 )
-shape = SubResource( 5 )
-
-[node name="CROUCH_0" type="Node2D" parent="Player/States"]
-position = Vector2( -3340, -1960 )
-scale = Vector2( 10, 10 )
-
-[node name="HURTBOX" type="Area2D" parent="Player/States/CROUCH_0"]
-position = Vector2( 334, 196 )
-scale = Vector2( 0.1, 0.1 )
-monitorable = false
-collision_layer = 0
-collision_mask = 0
-
-[node name="HEAD" type="CollisionShape2D" parent="Player/States/CROUCH_0/HURTBOX"]
-modulate = Color( 1, 1, 0, 1 )
-position = Vector2( 50, -410 )
-shape = SubResource( 6 )
-
-[node name="BODY" type="CollisionShape2D" parent="Player/States/CROUCH_0/HURTBOX"]
-modulate = Color( 1, 1, 0, 1 )
-position = Vector2( -19.9997, -300 )
-shape = SubResource( 7 )
-
-[node name="LEGS" type="CollisionShape2D" parent="Player/States/CROUCH_0/HURTBOX"]
-modulate = Color( 1, 1, 0, 1 )
-position = Vector2( -40, -9.99988 )
-shape = SubResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2( -10, -0.000244141 )

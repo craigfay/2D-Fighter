@@ -18,37 +18,20 @@ var current_animation = {
 }
 
 func _process(delta):
-    # Toggle off the previous collision state's visibility
-    for child in $States.get_children():
-        child.visible = false
-
-    # Crouch
-    if Input.is_action_pressed("ui_down"):
-        if is_actionable:
-            if is_on_floor():
-                $States.get_node("CROUCH_0").visible = true
 
     # Run 
     if is_actionable:
         if Input.is_action_pressed("ui_right"):
             if is_on_floor():
-                $States.get_node("CROUCH_0").visible = true
                 current_animation.frames = RUN_ANIMATION
                 current_animation.repeats = false
                 is_actionable = false
-
-    # Crouch
-    if is_actionable:
-        if Input.is_action_pressed("ui_down"):
-            if is_on_floor():
-                $States.get_node("CROUCH_0").visible = true
 
     # Idle
     if is_actionable:
         current_animation.frames = IDLE_ANIMATION
         current_animation.index = 0
         current_animation.repeats = true
-        # $States.get_node("IDLE_0").visible = true
 
     # Advance animation frame
     $Sprite.set('frame', current_animation.frames[current_animation.index])
