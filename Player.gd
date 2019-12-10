@@ -32,7 +32,7 @@ func _process(delta):
     # Advance animation frame
     $Sprite.set('frame', current_animation.frames[current_animation_frame])
     if current_animation_frame == (current_animation.frames.size() - 1):
-        current_animation = IDLE_ANIMATION
+        current_animation = get_animation(current_animation.leads_to)
         current_animation_frame = 0
     else:
         current_animation_frame += 1
@@ -62,6 +62,15 @@ func _physics_process(delta):
         if Input.is_action_just_pressed("ui_up"):
             motion.y = -jump_force
 
+func get_animation(name):
+    if name == "IDLE_ANIMATION":
+        return IDLE_ANIMATION
+    if name == "RUN_ANIMATION":
+        return RUN_ANIMATION
+    if name == "JUMP_ANIMATION":
+        return JUMP_ANIMATION
+    if name == "FALL_ANIMATION":
+        return FALL_ANIMATION
 
 const IDLE_ANIMATION = {
     "infinite": true,
@@ -69,6 +78,7 @@ const IDLE_ANIMATION = {
         "RUN_ANIMATION",
         "JUMP_ANIMATION",
     ],
+    "leads_to": "IDLE_ANIMATION",
     "frames": [
         10,10,10,10,
         11,11,11,11,
@@ -88,6 +98,7 @@ const RUN_ANIMATION = {
     "cancels_into": [
         "JUMP_ANIMATION",
     ],
+    "leads_to": "IDLE_ANIMATION",
     "frames": [
         0,0,0,0,
         1,1,1,1,
@@ -105,6 +116,7 @@ const RUN_ANIMATION = {
 const JUMP_ANIMATION = {
     "infinite": false,
     "cancels_into": [],
+    "leads_to": "FALL_ANIMATION",
     "frames": [
         20,20,20,20,
         21,21,21,21,
@@ -116,5 +128,12 @@ const JUMP_ANIMATION = {
         27,27,27,27,
         28,28,28,28,
         29,29,29,29,
-    ]
+    ],
+}
+
+const FALL_ANIMATION = {
+    "infinite": false,
+    "cancels_into": [],
+    "leads_to": "IDLE_ANIMATION",
+    "frames": [29],
 }
