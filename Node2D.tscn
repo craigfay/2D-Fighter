@@ -4,7 +4,7 @@
 [ext_resource path="res://ProtoAnims.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 240, 320 )
+extents = Vector2( 210, 460 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 377, 10 )
@@ -21,7 +21,7 @@ scale = Vector2( 0.1, 0.1 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Player"]
-position = Vector2( -1470, -440 )
+position = Vector2( -40, -430 )
 scale = Vector2( 10, 10 )
 texture = ExtResource( 2 )
 flip_h = true
@@ -30,7 +30,7 @@ hframes = 10
 frame = 10
 
 [node name="PhysicsCollider" type="CollisionShape2D" parent="Player"]
-position = Vector2( -10, -90.0001 )
+position = Vector2( 20, -230 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
