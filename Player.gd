@@ -18,9 +18,23 @@ var current_animation = {
 }
 
 func _process(delta):
-    # Toggle off the previous state
+    # Toggle off the previous collision state's visibility
     for child in $States.get_children():
         child.visible = false
+
+    # Crouch
+    if Input.is_action_pressed("ui_down"):
+        if is_actionable:
+            if is_on_floor():
+                $States.get_node("CROUCH_0").visible = true
+
+    # Run 
+    if Input.is_action_pressed("ui_right"):
+        if is_actionable:
+            if is_on_floor():
+                $States.get_node("CROUCH_0").visible = true
+                current_animation.frames = RUN_ANIMATION
+                is_actionable = false
 
     # Crouch
     if Input.is_action_pressed("ui_down"):
@@ -71,4 +85,17 @@ const IDLE_ANIMATION = [
     17,17,17,17,
     18,18,18,18,
     19,19,19,19,
+]
+
+const RUN_ANIMATION = [
+    0,0,0,0,
+    1,1,1,1,
+    2,2,2,2,
+    3,3,3,3,
+    4,4,4,4,
+    5,5,5,5,
+    6,6,6,6,
+    7,7,7,7,
+    8,8,8,8,
+    9,9,9,9,
 ]
