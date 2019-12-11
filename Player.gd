@@ -17,10 +17,14 @@ func _process(delta):
 
     # Run 
     if accepting_input && can_do('RUN_ANIMATION'):
-        if Input.is_action_pressed("ui_right"):
+        if Input.is_action_just_pressed("ui_right"):
             current_animation = RUN_ANIMATION
             current_animation_frame = 0
             accepting_input = false
+        elif Input.is_action_pressed("ui_right"):
+            current_animation = RUN_ANIMATION
+            accepting_input = false
+
 
     # Jump
     if accepting_input && can_do('JUMP_ANIMATION'):
@@ -31,11 +35,15 @@ func _process(delta):
 
     # Advance animation frame
     $Sprite.set('frame', current_animation.frames[current_animation_frame])
+    if current_animation.required_input: 
+        if not Input.is_action_pressed(current_animation.required_input):
+            current_animation = get_animation(current_animation.leads_to)
+            current_animation_frame = 0
     if current_animation_frame == (current_animation.frames.size() - 1):
         current_animation = get_animation(current_animation.leads_to)
         current_animation_frame = 0
     else:
-        current_animation_frame += 1
+        current_animation_frame += 1	
 
 
 func can_do(animation):
@@ -79,6 +87,7 @@ const IDLE_ANIMATION = {
         "JUMP_ANIMATION",
     ],
     "leads_to": "IDLE_ANIMATION",
+    "required_input": null,
     "frames": [
         10,10,10,10,
         11,11,11,11,
@@ -99,6 +108,7 @@ const RUN_ANIMATION = {
         "JUMP_ANIMATION",
     ],
     "leads_to": "IDLE_ANIMATION",
+    "required_input": "ui_right",
     "frames": [
         0,0,0,0,
         1,1,1,1,
@@ -117,6 +127,7 @@ const JUMP_ANIMATION = {
     "infinite": false,
     "cancels_into": [],
     "leads_to": "FALL_ANIMATION",
+    "required_input": null,
     "frames": [
         20,20,20,20,
         21,21,21,21,
@@ -135,5 +146,6 @@ const FALL_ANIMATION = {
     "infinite": false,
     "cancels_into": [],
     "leads_to": "IDLE_ANIMATION",
+    "required_input": null,
     "frames": [29],
 }

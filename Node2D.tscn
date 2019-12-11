@@ -6,10 +6,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 210, 460 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 377, 10 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 26, 33 )
 
 [node name="Node2D" type="Node2D"]
@@ -44,10 +44,10 @@ editor/display_folded = true
 [node name="FloorCollider" type="CollisionShape2D" parent="Ground"]
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 423, 229 )
-shape = SubResource( 9 )
+shape = SubResource( 2 )
 
 [node name="Barrel" type="KinematicBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barrel"]
 position = Vector2( 502, 186 )
-shape = SubResource( 10 )
+shape = SubResource( 3 )
