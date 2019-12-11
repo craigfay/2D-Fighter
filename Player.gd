@@ -59,9 +59,11 @@ func _physics_process(delta):
     # Left/Right motion
     # TODO check state instead of action pressed
     if Input.is_action_pressed("ui_left"):
-        motion.x = -walk_speed
+        if can_do("RUN_ANIMATION") or not is_on_floor():
+            motion.x = -walk_speed
     elif Input.is_action_pressed("ui_right"):
-        motion.x = walk_speed
+        if can_do("RUN_ANIMATION") or not is_on_floor():
+            motion.x = walk_speed
     else:
         motion.x = 0
 
