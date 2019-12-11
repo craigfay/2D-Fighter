@@ -15,23 +15,23 @@ func _process(delta):
     
     var accepting_input = true
 
-    # Run 
-    if accepting_input && can_do('RUN_ANIMATION'):
-        if Input.is_action_just_pressed("ui_right"):
-            current_animation = RUN_ANIMATION
-            current_animation_frame = 0
-            accepting_input = false
-        elif Input.is_action_pressed("ui_right"):
-            current_animation = RUN_ANIMATION
-            accepting_input = false
-
-
     # Jump
     if accepting_input && can_do('JUMP_ANIMATION'):
         if Input.is_action_just_pressed("ui_up"):
             current_animation = JUMP_ANIMATION
             current_animation_frame = 0
             accepting_input = false
+
+    # Run 
+    if accepting_input && can_do('RUN_ANIMATION'):
+        if is_on_floor():
+            if Input.is_action_just_pressed("ui_right"):
+                current_animation = RUN_ANIMATION
+                current_animation_frame = 0
+                accepting_input = false
+            elif Input.is_action_pressed("ui_right"):
+                current_animation = RUN_ANIMATION
+                accepting_input = false
 
     # Advance animation frame
     $Sprite.set('frame', current_animation.frames[current_animation_frame])
@@ -68,7 +68,8 @@ func _physics_process(delta):
     # Jump
     if is_on_floor():
         if Input.is_action_just_pressed("ui_up"):
-            motion.y = -jump_force
+            if can_do("JUMP_ANIMATION"):
+                motion.y = -jump_force
 
 func get_animation(name):
     if name == "IDLE_ANIMATION":
