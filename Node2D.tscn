@@ -27,7 +27,7 @@ texture = ExtResource( 2 )
 flip_h = true
 vframes = 3
 hframes = 10
-frame = 10
+frame = 19
 
 [node name="PhysicsCollider" type="CollisionShape2D" parent="Player"]
 position = Vector2( 20, -230 )

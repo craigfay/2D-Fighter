@@ -15,6 +15,9 @@ func _process(delta):
     
     var accepting_input = true
 
+    if FALL_ANIMATION == current_animation and not is_on_floor():
+        return
+
     # Jump
     if accepting_input && can_do('JUMP_ANIMATION'):
         if Input.is_action_just_pressed("ui_up"):
@@ -141,7 +144,6 @@ const JUMP_ANIMATION = {
         26,26,26,26,
         27,27,27,27,
         28,28,28,28,
-        29,29,29,29,
     ],
 }
 
@@ -150,5 +152,5 @@ const FALL_ANIMATION = {
     "cancels_into": [],
     "leads_to": "IDLE_ANIMATION",
     "required_input": null,
-    "frames": [29],
+    "frames": [28],
 }
