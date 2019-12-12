@@ -11,6 +11,9 @@ export var jump_force = 640
 var current_animation = IDLE_ANIMATION
 var current_animation_frame = 0
 
+# State variables
+var jumpsquat_frames = 6
+
 func _process(delta):
     
     var accepting_input = true
@@ -61,6 +64,10 @@ func _physics_process(delta):
 
     # Left/Right motion
     # TODO check state instead of action pressed
+    if current_animation == JUMP_ANIMATION:
+        if current_animation_frame == jumpsquat_frames:
+            motion.y = -jump_force
+
     if Input.is_action_pressed("ui_left"):
         if can_do("RUN_ANIMATION") or not is_on_floor():
             motion.x = -walk_speed
@@ -69,12 +76,6 @@ func _physics_process(delta):
             motion.x = walk_speed
     else:
         motion.x = 0
-
-    # Jump
-    if is_on_floor():
-        if Input.is_action_just_pressed("ui_up"):
-            if can_do("JUMP_ANIMATION"):
-                motion.y = -jump_force
 
 func get_animation(name):
     if name == "IDLE_ANIMATION":
@@ -135,7 +136,7 @@ const JUMP_ANIMATION = {
     "leads_to": "FALL_ANIMATION",
     "required_input": null,
     "frames": [
-        20,20,20,20,
+        20,20,20,20,20,20,
         21,21,21,21,
         22,22,22,22,
         23,23,23,23,
