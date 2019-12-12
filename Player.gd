@@ -15,7 +15,6 @@ var current_animation_frame = 0
 var jumpsquat_frames = 6
 
 func _process(delta):
-    
     var accepting_input = true
 
     if FALL_ANIMATION == current_animation and not is_on_floor():
@@ -28,16 +27,25 @@ func _process(delta):
             current_animation_frame = 0
             accepting_input = false
 
-    # Run 
-    if accepting_input && can_do('RUN_ANIMATION'):
-        if is_on_floor():
-            if Input.is_action_just_pressed("ui_right"):
-                current_animation = RUN_ANIMATION
+    # Dash Left
+    if accepting_input && Input.is_action_pressed("ui_left"):
+        if can_do('DASH_L_ANIMATION'):
+            if Input.is_action_just_pressed("ui_left"):
+                current_animation = DASH_L_ANIMATION
                 current_animation_frame = 0
-                accepting_input = false
-            elif Input.is_action_pressed("ui_right"):
-                current_animation = RUN_ANIMATION
-                accepting_input = false
+            else:
+                current_animation = DASH_L_ANIMATION
+            accepting_input = false
+
+    # Dash Right
+    if accepting_input && Input.is_action_pressed("ui_right"):
+        if can_do('DASH_R_ANIMATION'):
+            if Input.is_action_just_pressed("ui_right"):
+                current_animation = DASH_R_ANIMATION
+                current_animation_frame = 0
+            else:
+                current_animation = DASH_R_ANIMATION
+            accepting_input = false
 
     # Advance animation frame
     $Sprite.set('frame', current_animation.frames[current_animation_frame])
@@ -62,14 +70,20 @@ func _physics_process(delta):
     motion.y += gravity_force
     motion = move_and_slide(motion, UP)
 
-    # Left/Right motion
+    # Jump
     if current_animation == JUMP_ANIMATION:
         if current_animation_frame == jumpsquat_frames:
             motion.y = -jump_force
 
-    # Horizontal Movement
-    if current_animation == RUN_ANIMATION:
+    # Horizontal Movement (Grounded)
+    if current_animation == DASH_L_ANIMATION:
+        motion.x = -walk_speed
+    elif current_animation == DASH_R_ANIMATION:
         motion.x = walk_speed
+    # Horizontal Movement (Airborne)
+    elif Input.is_action_pressed("ui_left"):
+        if not is_on_floor():
+            motion.x = -walk_speed
     elif Input.is_action_pressed("ui_right"):
         if not is_on_floor():
             motion.x = walk_speed
@@ -79,8 +93,10 @@ func _physics_process(delta):
 func get_animation(name):
     if name == "IDLE_ANIMATION":
         return IDLE_ANIMATION
-    if name == "RUN_ANIMATION":
-        return RUN_ANIMATION
+    if name == "DASH_L_ANIMATION":
+        return DASH_L_ANIMATION
+    if name == "DASH_R_ANIMATION":
+        return DASH_L_ANIMATION
     if name == "JUMP_ANIMATION":
         return JUMP_ANIMATION
     if name == "FALL_ANIMATION":
@@ -89,7 +105,8 @@ func get_animation(name):
 const IDLE_ANIMATION = {
     "infinite": true,
     "cancels_into": [
-        "RUN_ANIMATION",
+        "DASH_L_ANIMATION",
+        "DASH_R_ANIMATION",
         "JUMP_ANIMATION",
     ],
     "leads_to": "IDLE_ANIMATION",
@@ -108,7 +125,28 @@ const IDLE_ANIMATION = {
     ]
 }
 
-const RUN_ANIMATION = {
+const DASH_L_ANIMATION = {
+    "infinite": false,
+    "cancels_into": [
+        "JUMP_ANIMATION",
+    ],
+    "leads_to": "IDLE_ANIMATION",
+    "required_input": "ui_left",
+    "frames": [
+        0,0,0,0,
+        1,1,1,1,
+        2,2,2,2,
+        3,3,3,3,
+        4,4,4,4,
+        5,5,5,5,
+        6,6,6,6,
+        7,7,7,7,
+        8,8,8,8,
+        9,9,9,9,
+    ]
+}
+
+const DASH_R_ANIMATION = {
     "infinite": false,
     "cancels_into": [
         "JUMP_ANIMATION",
