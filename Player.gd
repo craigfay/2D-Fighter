@@ -3,7 +3,7 @@ extends KinematicBody2D
 const UP = Vector2(0, -1)
 var motion = Vector2()
 
-export var walk_speed = 240
+export var walk_speed = 320
 export var gravity_force = 32
 export var jump_force = 640
 
@@ -101,6 +101,8 @@ func get_animation(name):
         return JUMP_ANIMATION
     if name == "FALL_ANIMATION":
         return FALL_ANIMATION
+    if name == "LANDING_ANIMATION":
+        return LANDING_ANIMATION
 
 const IDLE_ANIMATION = {
     "infinite": true,
@@ -188,7 +190,15 @@ const JUMP_ANIMATION = {
 const FALL_ANIMATION = {
     "infinite": false,
     "cancels_into": [],
-    "leads_to": "IDLE_ANIMATION",
+    "leads_to": "LANDING_ANIMATION",
     "required_input": null,
     "frames": [28],
+}
+
+const LANDING_ANIMATION = {
+    "infinite": false,
+    "cancels_into": [],
+    "leads_to": "IDLE_ANIMATION",
+    "required_input": null,
+    "frames": [29,29,29,29,20,20,20],
 }
