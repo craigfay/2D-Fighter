@@ -63,16 +63,15 @@ func _physics_process(delta):
     motion = move_and_slide(motion, UP)
 
     # Left/Right motion
-    # TODO check state instead of action pressed
     if current_animation == JUMP_ANIMATION:
         if current_animation_frame == jumpsquat_frames:
             motion.y = -jump_force
 
-    if Input.is_action_pressed("ui_left"):
-        if can_do("RUN_ANIMATION") or not is_on_floor():
-            motion.x = -walk_speed
+    # Horizontal Movement
+    if current_animation == RUN_ANIMATION:
+        motion.x = walk_speed
     elif Input.is_action_pressed("ui_right"):
-        if can_do("RUN_ANIMATION") or not is_on_floor():
+        if not is_on_floor():
             motion.x = walk_speed
     else:
         motion.x = 0
