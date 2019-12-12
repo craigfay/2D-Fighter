@@ -4,7 +4,7 @@ const UP = Vector2(0, -1)
 var motion = Vector2()
 
 export var walk_speed = 320
-export var gravity_force = 32
+export var fall_speed = 36 
 export var jump_force = 640
 
 # Animations
@@ -67,7 +67,7 @@ func can_do(animation):
 func _physics_process(delta):
 
     # Gravity
-    motion.y += gravity_force
+    motion.y += fall_speed
     motion = move_and_slide(motion, UP)
 
     # Jump
@@ -114,16 +114,20 @@ const IDLE_ANIMATION = {
     "leads_to": "IDLE_ANIMATION",
     "required_input": null,
     "frames": [
-        10,10,10,10,
-        11,11,11,11,
-        12,12,12,12,
-        13,13,13,13,
-        14,14,14,14,
-        15,15,15,15,
-        16,16,16,16,
-        17,17,17,17,
-        18,18,18,18,
-        19,19,19,19,
+        75,75,75,75,
+        76,76,76,76,
+        77,77,77,77,
+        78,78,78,78,
+        79,79,79,79,
+        80,80,80,80,
+        81,81,81,81,
+        82,82,82,82,
+        83,83,83,83,
+        84,84,84,84,
+        85,85,85,85,
+        86,86,86,86,
+        87,87,87,87,
+        88,88,88,88,
     ]
 }
 
@@ -175,15 +179,15 @@ const JUMP_ANIMATION = {
     "leads_to": "FALL_ANIMATION",
     "required_input": null,
     "frames": [
-        20,20,20,20,20,20,
+        15,15,15,15,
+        16,16,16,16,
+        17,17,17,17,
+        18,18,18,18,
+        19,19,19,19,
+        20,20,20,20,
         21,21,21,21,
         22,22,22,22,
         23,23,23,23,
-        24,24,24,24,
-        25,25,25,25,
-        26,26,26,26,
-        27,27,27,27,
-        28,28,28,28,
     ],
 }
 
@@ -200,5 +204,5 @@ const LANDING_ANIMATION = {
     "cancels_into": [],
     "leads_to": "IDLE_ANIMATION",
     "required_input": null,
-    "frames": [29,29,29,29,20,20,20],
+    "frames": [24,24,24,24,24,24,30,30],
 }

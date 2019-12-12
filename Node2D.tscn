@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://ProtoAnims.png" type="Texture" id=2]
+[ext_resource path="res://Char_1.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 210, 460 )
@@ -21,13 +21,13 @@ scale = Vector2( 0.1, 0.1 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Player"]
-position = Vector2( -40, -430 )
+position = Vector2( 30, 330 )
 scale = Vector2( 10, 10 )
 texture = ExtResource( 2 )
+offset = Vector2( -7, -85 )
 flip_h = true
-vframes = 3
-hframes = 10
-frame = 20
+vframes = 6
+hframes = 15
 
 [node name="PhysicsCollider" type="CollisionShape2D" parent="Player"]
 position = Vector2( 20, -230 )
@@ -39,7 +39,6 @@ current = true
 zoom = Vector2( 0.75, 0.75 )
 
 [node name="Ground" type="StaticBody2D" parent="."]
-editor/display_folded = true
 
 [node name="FloorCollider" type="CollisionShape2D" parent="Ground"]
 modulate = Color( 0, 0, 0, 1 )
